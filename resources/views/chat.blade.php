@@ -15,10 +15,15 @@
 
                 <div id="contents">
                     <div id="wrapper">
-                        <div class="bubble-container">
-                            <!--ChatLog-->
-
-                        </div>
+                        <ul class="collection">
+                            @foreach($messages as $message)
+                                <li class="collection-item avatar">
+                                    <i class="material-icons circle red">icon</i>
+                                    <span class="title">{{$message->usuario}}</span>
+                                    <p>{{$message->texto}}</p>
+                                </li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
                     <div id="form" class="center">
