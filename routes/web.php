@@ -28,12 +28,28 @@ Route::get('/mensajes',function(){
 });
 Route::get('/chat',function(){
 
-    $messages = new \App\Mensaje();
-    $messages->usuario = 'lsanmartin';
-    $messages->texto = 'Hola mundo';
-    $messages->fecha = \Carbon\Carbon::now();
-    $user = $messages->usuario;
-    $messages->save();
     $messages = \App\Mensaje::all();
-    return view('chat',['user' => $user,"messages" => $messages]);
+    return view('chat',["messages" => $messages]);
+});
+
+Route::post('/chat',function(){
+
+    if(Request::has('user')){
+        $user = Request::input('user');
+        if(Request::has('msgText')){
+            $msgText = Request::input('msgText');
+            $messages = new \App\Mensaje();
+            $messages->usuario = $user;
+            $messages->texto = $msgText;
+            $messages->fecha = \Carbon\Carbon::now();
+            $messages->save();
+            $messages = \App\Mensaje::all();
+            return view('chat',['user' => $user,"messages" => $messages]);
+        }
+    }else{
+        $messages = \App\Mensaje::all();
+        return view('chat',["messages" => $messages]);
+    }
+
+
 });
