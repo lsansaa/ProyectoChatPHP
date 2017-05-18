@@ -20,7 +20,7 @@
                                 <li class="collection-item avatar">
                                     <i class="material-icons circle red">icon</i>
                                     <span class="title">{{$message->usuario}}</span>
-                                    <p>{{$message->texto}}</p>
+                                    <p>{{$message->texto}} - {{$message->fecha}}</p>
                                 </li>
                             @endforeach
                         </ul>
@@ -31,7 +31,7 @@
                             <div class="row">
                                 <div class="input-field col s2">
                                     {{csrf_field()}}
-                                    <input class="validate" placeholder="Usuario" name="user" id="user"/>
+                                    <input class="validate" placeholder="Usuario" value="{{$user or ''}}"  name= "user" id="user"/>
                                 </div>
                                 <div class="input-field col s8">
                                     {{csrf_field()}}
